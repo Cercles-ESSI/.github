@@ -15,57 +15,44 @@ CERCLES (Creació d'Equips i seguiment del Rendiment i CoL·laboració En projec
 
 ---
 
+---
+
 ## **Requisitos de Instalación**
 
-Antes de proceder con la instalación de CERCLES, asegúrate de cumplir con los siguientes requisitos:
+Antes de proceder con la instalación de CERCLES haciendo uso de Docker Compose, asegúrate de cumplir con los siguientes requisitos según tu sistema operativo:
 
-1. **IDE**: Visual Studio Code (VSC) o cualquier otro IDE para proyectos backend y frontend (como IntelliJ o Eclipse).
-2. **Java Development Kit (JDK)**: Descargar e instalar la versión 23 del JDK desde [Oracle](https://www.oracle.com/java/technologies/downloads/).
-3. **Apache Maven**: Instalar Maven para gestionar las dependencias y construir el archivo `.war`.
-   - En Linux/Ubuntu: `sudo apt install maven`
-   - En Windows: Descargar desde [Maven](https://maven.apache.org/download.cgi) e incluirlo en las variables de entorno.
-4. **Node.js y npm**: Descargar e instalar la versión 16+ de Node.js desde [Node.js](https://nodejs.org/en/).
-5. **Servidor Web Apache Tomcat**: Descargar la versión 10.x desde [Tomcat Downloads](https://tomcat.apache.org/download-10.cgi) y configurarlo para desplegar aplicaciones web.
-6. **Base de datos MariaDB**: Descargar e instalar MariaDB desde [MariaDB Official Downloads](https://mariadb.org/download/).
+1.**Docker y Docker Compose**:
+  
+  1.1 En Windows: Descargar e instalar Docker Desktop desde [Docker](https://www.docker.com/products/docker-desktop/).Reinicia el sistema tras completar el proceso.
+  
+  1.2 En Linux (Ubuntu): Instalar mediante terminal:
+  ```bash
+    sudo apt-get update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  ```
+  (Opcional: Añade tu usuario al grupo docker con sudo usermod -aG docker $USER para ejecutar comandos sin sudo).
+  
+2. **IDE** (Opcional para despliegue): Visual Studio Code (VSC) o cualquier otro IDE para proyectos backend y frontend (como IntelliJ o Eclipse).
 
 ---
 
 ## **Pasos de Instalación**
 
-### **1. Generar el Archivo `.war`**
+### **1. Configurar el correo para el primer login**
 
-El archivo `.war` ya debería estar disponible. Si necesitas generarlo nuevamente, puedes hacerlo desde el IDE configurado con Maven. Este archivo se guarda automáticamente en la carpeta `target` dentro del directorio del proyecto backend.
+Edita el archivo `application-secret.properties`, ubicado en `src/main/resources` del proyecto backend.
 
-### **2. Desplegar el Archivo `.war`**
-
-Copia el archivo `.war` al directorio `webapps` del servidor Apache Tomcat. Tomcat se encargará de descomprimir y desplegar el archivo.
-
-### **3. Configurar la Base de Datos**
-
-1. Crear una nueva base de datos en MariaDB o MySQL.
-2. Guarda la URL, el puerto, el usuario y la contraseña de conexión.
-3. No es necesario añadir tablas ni datos manualmente; la aplicación los creará automáticamente al ejecutarse por primera vez.
-
-### **4. Configurar la Conexión a la Base de Datos**
-
-Edita el archivo `application.properties`, ubicado en `src/main/resources` del proyecto backend, para incluir los datos de conexión de la base de datos. Un ejemplo de configuración:
+En este archivo debes definir tu correo de Google y tu nombre para poder entrar la primera vez. Un ejemplo sería: 
 
 ```properties
-# Datasource
-spring.datasource.url=jdbc:mariadb://localhost:3306/nombreBD
-spring.datasource.username=username
-spring.datasource.password=password
-spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
-
-# JPA Properties
-spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect
-spring.jpa.hibernate.ddl-auto=none
-spring.jpa.show-sql=true
+# Reemplazar por el correo de Google con el que harás el primer login
+app.initial-email=maryx51202@gmail.com
+app.initial-name=Mary Ojuyenum
 ```
 
-### **5. Iniciar el Servidor**
+### **2. Iniciar el proyecto**
 
-Inicia Apache Tomcat y verifica que la aplicación esté funcionando accediendo a `http://localhost:8080`.
+Inicia el docker  y verifica que la aplicación esté funcionando accediendo a `http://localhost:3030`.
 
 ---
 
@@ -76,7 +63,7 @@ Inicia Apache Tomcat y verifica que la aplicación esté funcionando accediendo 
 | Archivo                                                      | Nombre                             | Descripción                                                |
 |--------------------------------------------------------------|------------------------------------|------------------------------------------------------------|
 | [Manual de usuario](https://github.com/cercles-tfg/cercles-tfg-frontend/blob/main/docs/Manual%20de%20usuario.pdf) | Manual de usuario                  | Guía para los usuarios de la aplicación CERCLES, explicando cómo usar las funcionalidades. |
-| [Swagger API](https://cercles-tfg.github.io/cercles-tfg-backend/) | Documentación Swagger API           | Acceso al Swagger que describe la API RESTful de CERCLES, creado mediante una GitHub Page |
+| [Swagger API](https://cercles-essi.github.io/cercles-ESSI-backend/) | Documentación Swagger API           | Acceso al Swagger que describe la API RESTful de CERCLES, creado mediante una GitHub Page |
 
 ---
 
